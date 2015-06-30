@@ -1,6 +1,6 @@
 angular.module('uiSwitch', [])
 
-.directive('switch', function($compile, $parse){
+.directive('switch', [function(){
     return {
           require: 'ngModel'
         , restrict: 'AE'
@@ -11,12 +11,12 @@ angular.module('uiSwitch', [])
             ngModel: '=',
             ngChange: '@'
         }
-        , controller: function($scope){
+        , controller: ['$scope', function($scope){
             $scope.updateSwitch = function(element){
                 //set style
                 $scope.setElementStyle(element);
             };
-            
+
             $scope.setElementStyle = function(element){
                 if($scope.ngModel){
                     element.addClass('checked');
@@ -24,7 +24,7 @@ angular.module('uiSwitch', [])
                     element.removeClass('checked');
                 }
             };
-        }
+        }]
         , template: function(element, attrs) {
             var html = '';
                 html += '<span';
@@ -68,5 +68,5 @@ angular.module('uiSwitch', [])
                 );
             }
         }
-    }
-});
+    };
+}]);
